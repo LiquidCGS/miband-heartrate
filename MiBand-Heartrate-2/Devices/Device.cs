@@ -11,7 +11,7 @@ namespace MiBand_Heartrate_2.Devices
         [Description("Mi Band 2/3")]
         MIBAND_2_3,
 
-        [Description("Mi Band 4")]
+        [Description("Mi Band 4/5")]
         MIBAND_4
     }
 
@@ -47,7 +47,8 @@ namespace MiBand_Heartrate_2.Devices
 
         public DeviceModel Model { get; internal set; }
 
-
+        
+        // heartrate forwarded here, take value from here? and also call OSC send command here?
         ushort _heartrate = 0;
 
         public ushort Heartrate
@@ -57,6 +58,7 @@ namespace MiBand_Heartrate_2.Devices
             {
                 _heartrate = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Heartrate"));
+                Osc.OscSend(value);
             }
         }
 

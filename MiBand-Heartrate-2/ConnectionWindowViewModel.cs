@@ -97,9 +97,16 @@ namespace MiBand_Heartrate_2
             }
         }
 
+        
         private void OnBluetoothAdded(DeviceWatcher sender, DeviceInformation args)
         {
-            Devices.Add(args);
+            try
+            {
+                Devices.Add(args);
+            }catch (System.NotSupportedException e)
+            {
+
+            }
         }
 
         // --------------------------------------
