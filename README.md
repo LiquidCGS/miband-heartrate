@@ -1,4 +1,4 @@
-# Mi Band Heartrate
+# Mi Band Heartrate (with VRC implementation via OSC - Proof of Concept)
 
 Enable and monitor heartrate with Mi Band device on Windows 10.
 
@@ -9,6 +9,7 @@ Enable and monitor heartrate with Mi Band device on Windows 10.
 * Mi Band 2
 * Mi Band 3
 * Mi Band 4
+* Mi Band 5 (Tested)
 
 
 ### Requirements
@@ -24,9 +25,9 @@ Enable and monitor heartrate with Mi Band device on Windows 10.
 
 #### For Mi Band 2 or Mi Band 3
 
-* Un-pairing your Mi Band 2/3 from any devices
+* Un-pair your Mi Band 2/3 from any devices
 
-* Connect and pair your Mi Band 2/3 to your computer
+* Connect and pair your Mi Band 2/3 to your computer via Windows Settings>Bluetooth
 
 * Launch `MiBand-Heartrate.exe`
 
@@ -34,7 +35,7 @@ Enable and monitor heartrate with Mi Band device on Windows 10.
 
 * Once your device is successfully connected and authenticated, click on `Start` button
 
-#### For Mi Band 4
+#### For Mi Band 4/5
 
 * Get your authentication key of your device, visit ([freemyband.com](http://www.freemyband.com/)) for more information
 
@@ -75,9 +76,10 @@ Enable and monitor heartrate with Mi Band device on Windows 10.
 
 ### Useful links
 
+* https://github.com/Eryux/miband-heartrate (Base implementation)
+* https://github.com/creotiv/MiBand2
 * [Microsoft GATT Documentation](https://docs.microsoft.com/fr-fr/windows/uwp/devices-sensors/bluetooth-low-energy-overview)
 * [Mi Band 2 Authentication by leojrfs](https://leojrfs.github.io/writing/miband2-part1-auth/#reference), [python](https://github.com/leojrfs/miband2)
-* https://github.com/creotiv/MiBand2
 * [How I hacked my Xiaomi MiBand 2 fitness tracker — a step-by-step Linux guide by Andrey Nikishaev](https://medium.com/machine-learning-world/how-i-hacked-xiaomi-miband-2-to-control-it-from-linux-a5bd2f36d3ad)
 
 
