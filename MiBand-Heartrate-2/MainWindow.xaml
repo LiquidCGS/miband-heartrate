@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MiBand_Heartrate_2"
         mc:Ignorable="d"
-        Title="Heartrate Monitor" Width="400" Height="360" MinHeight="360" MinWidth="400" Closing="Window_Closing"  Icon="icon.ico">
+        Title="Heartrate Monitor" Width="400" Height="370" MinHeight="370" MinWidth="400" Closing="Window_Closing"  Icon="icon.ico">
 
     <Window.Resources>
         <ResourceDictionary Source="Style.xaml"></ResourceDictionary>
@@ -14,7 +14,7 @@
     <Window.DataContext>
         <local:MainWindowViewModel></local:MainWindowViewModel>
     </Window.DataContext>
-    
+
     <StackPanel Background="White">
         <Grid Margin="5" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
@@ -59,22 +59,26 @@
             </StackPanel>
         </GroupBox>
 
-        <GroupBox Header="Options" Margin="5" BorderBrush="DarkGray">
-            <StackPanel Margin="5">
+        <GroupBox Header="Options" Margin="5" BorderBrush="DarkGray" Height="125">
+            <StackPanel Margin="5" Grid.Column="0">
                 <CheckBox Margin="0 2" IsChecked="{Binding ContinuousMode, Mode=TwoWay}">Enable continuous mode</CheckBox>
                 <CheckBox Margin="0 2" IsChecked="{Binding EnableCSVOutput, Mode=TwoWay}">Export data in CSV file</CheckBox>
                 <CheckBox Margin="0 2" IsChecked="{Binding EnableFileOutput, Mode=TwoWay}">Write realtime data in text file</CheckBox>
+                <CheckBox Margin="0 2" IsChecked="{Binding EnableVRChatOSCOutput, Mode=TwoWay}">Enable VRChat OSC Heartrate Output</CheckBox>
+                <CheckBox Margin="0 2" IsChecked="{Binding EnableVRChatOSCTimeOutput, Mode=TwoWay}" IsEnabled="{Binding EnableVRChatOSCOutput}">Enable VRChat OSC IRL Time Output</CheckBox>
             </StackPanel>
         </GroupBox>
 
-        <Grid Height="40" Margin="0 15 0 10">
+        <Grid Height="40" Margin="0 0 0 0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="23*"></ColumnDefinition>
+                <ColumnDefinition Width="128*"/>
+                <ColumnDefinition Width="45*"/>
+                <ColumnDefinition Width="196*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button Content="Start" Grid.Column="0" Margin="5 0" Command="{Binding Command_Start}"></Button>
-            <Button Content="Stop" Grid.Column="1" Margin="5 0" Command="{Binding Command_Stop}"></Button>
+            <Button Content="Start" Grid.Column="0" Margin="5,0" Command="{Binding Command_Start}" Grid.ColumnSpan="3"></Button>
+            <Button Content="Stop" Grid.Column="3" Margin="5 0" Command="{Binding Command_Stop}"></Button>
         </Grid>
     </StackPanel>
 </Window>

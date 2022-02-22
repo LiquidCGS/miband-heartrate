@@ -103,6 +103,36 @@ namespace MiBand_Heartrate_2
             }
         }
 
+        bool _enableVRChatOSCOutput = false;
+
+        public bool EnableVRChatOSCOutput
+        {
+            get { return _enableVRChatOSCOutput; }
+            set
+            {
+                _enableVRChatOSCOutput = value;
+
+                Setting.Set("EnableVRChatOSCOutput", _enableVRChatOSCOutput);
+
+                InvokePropertyChanged("EnableVRChatOSCOutput");
+            }
+        }
+
+        bool _enableVRChatOSCTimeOutput = false;
+
+        public bool EnableVRChatOSCTimeOutput
+        {
+            get { return _enableVRChatOSCTimeOutput; }
+            set
+            {
+                _enableVRChatOSCTimeOutput = value;
+
+                Setting.Set("EnableVRChatOSCTimeOutput", _enableVRChatOSCTimeOutput);
+
+                InvokePropertyChanged("EnableVRChatOSCTimeOutput");
+            }
+        }
+
         bool _guard = false;
 
         DeviceHeartrateFileOutput _fileOutput = null;
@@ -116,6 +146,8 @@ namespace MiBand_Heartrate_2
             ContinuousMode = Setting.Get("ContinuousMode", true);
             EnableFileOutput = Setting.Get("FileOutput", false);
             EnableCSVOutput = Setting.Get("CSVOutput", false);
+            EnableVRChatOSCOutput = Setting.Get("EnableVRChatOSCOutput", true);
+            EnableVRChatOSCTimeOutput = Setting.Get("EnableVRChatOSCTimeOutput", false);
         }
 
         ~MainWindowViewModel()
@@ -259,6 +291,15 @@ namespace MiBand_Heartrate_2
                             _csvOutput = new DeviceHeartrateCSVOutput("heartrate.csv", Device);
                         }
 
+                        if (_enableVRChatOSCOutput)
+                        {
+                            Osc.OscStart();
+                            Osc.OSCHeartRateEnable = true;
+                        }
+                        if (_enableVRChatOSCTimeOutput)
+                        {
+                            Osc.OSCRealTimeEnable = true;
+                        }
                     }, o =>
                     {
                         return Device != null && Device.Status == Devices.DeviceStatus.ONLINE_AUTH && !Device.HeartrateMonitorStarted;
@@ -281,8 +322,12 @@ namespace MiBand_Heartrate_2
                     {
                         Device.StopHeartrateMonitor();
 
+                        if (_enableVRChatOSCOutput) { Osc.OscStop(); }
+                        
                         _fileOutput = null;
                         _csvOutput = null;
+                        Osc.OSCHeartRateEnable = false;
+                        Osc.OSCRealTimeEnable = false;
                     }, o =>
                     {
                         return Device != null && Device.HeartrateMonitorStarted;
