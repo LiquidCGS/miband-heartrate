@@ -16,6 +16,9 @@ namespace MiBand_Heartrate_2
         static public bool OSCRealTimeEnable = false;
         static public bool OSCHeartRateEnable = false;
 
+        static public string BPMParam = "BPM";
+        static public string TimeParam = "IrlTime";
+
         static private OscSender sender = null;
 
         static public void OscStart()
@@ -32,7 +35,7 @@ namespace MiBand_Heartrate_2
             sender = null;
         }
 
-        static public void OscSendBPM(float BPM, String BPMParam)
+        static public void OscSendBPM(float BPM)
         {
             if (!OSCHeartRateEnable) return;
 
@@ -44,7 +47,7 @@ namespace MiBand_Heartrate_2
         }
 
 
-        static public void OscSendTime(String TimeParam)
+        static public void OscSendTime()
         {
 
             if (!OSCRealTimeEnable) return;

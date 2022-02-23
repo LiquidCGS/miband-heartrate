@@ -59,14 +59,24 @@
             </StackPanel>
         </GroupBox>
 
-        <GroupBox Header="Options" Margin="5" BorderBrush="DarkGray" Height="125">
-            <StackPanel Margin="5" Grid.Column="0">
-                <CheckBox Margin="0 2" IsChecked="{Binding ContinuousMode, Mode=TwoWay}">Enable continuous mode</CheckBox>
-                <CheckBox Margin="0 2" IsChecked="{Binding EnableCSVOutput, Mode=TwoWay}">Export data in CSV file</CheckBox>
-                <CheckBox Margin="0 2" IsChecked="{Binding EnableFileOutput, Mode=TwoWay}">Write realtime data in text file</CheckBox>
-                <CheckBox Margin="0 2" IsChecked="{Binding EnableVRChatOSCOutput, Mode=TwoWay}">Enable VRChat OSC Heartrate Output</CheckBox>
-                <CheckBox Margin="0 2" IsChecked="{Binding EnableVRChatOSCTimeOutput, Mode=TwoWay}" IsEnabled="{Binding EnableVRChatOSCOutput}">Enable VRChat OSC IRL Time Output</CheckBox>
-            </StackPanel>
+        <GroupBox Header="Options" Margin="5,5,10,5" BorderBrush="DarkGray" Height="125">
+            <Grid Margin="0,0,0,0">
+                <StackPanel Margin="5,0,120,0" Grid.Column="0">
+                    <CheckBox Margin="0 2" IsChecked="{Binding ContinuousMode, Mode=TwoWay}">Enable continuous mode</CheckBox>
+                    <CheckBox Margin="0 2" IsChecked="{Binding EnableCSVOutput, Mode=TwoWay}">Export data in CSV file</CheckBox>
+                    <CheckBox Margin="0 2" IsChecked="{Binding EnableFileOutput, Mode=TwoWay}">Write realtime data in text file</CheckBox>
+                    <CheckBox Margin="0 2" IsChecked="{Binding EnableVRChatOSCOutput, Mode=TwoWay}">Enable VRChat OSC Heartrate Output</CheckBox>
+                    <CheckBox Margin="0 2" IsChecked="{Binding EnableVRChatOSCTimeOutput, Mode=TwoWay}" IsEnabled="{Binding EnableVRChatOSCOutput}">Enable VRChat OSC IRL Time Output</CheckBox>
+                </StackPanel>
+                
+                <GroupBox Header="Params" Margin="233,33,0,0" BorderBrush="DarkGray" IsEnabled="{Binding EnableVRChatOSCOutput}">
+                    <StackPanel Margin="0,0,0,0" Grid.Column="0">
+                        <TextBox TextAlignment="Center" Text="{Binding SettingBPMParam}"  Margin="0,8,0,18" IsEnabled="{Binding EnableVRChatOSCOutput}"/>
+                        <TextBox TextAlignment="Center" Text="{Binding SettingTimeParam}" Margin="0,-18,0,0" IsEnabled="{Binding EnableVRChatOSCTimeOutput}"/>
+                    </StackPanel>
+                </GroupBox>
+                
+            </Grid>
         </GroupBox>
 
         <Grid Height="40" Margin="0 0 0 0">

@@ -133,6 +133,35 @@ namespace MiBand_Heartrate_2
             }
         }
 
+        string _Settingbpmparam = "BPM";
+
+        public string SettingBPMParam
+        {
+            get { return _Settingbpmparam; }
+            set
+            {
+                _Settingbpmparam = value;
+
+                Setting.Set("BPMParam", _Settingbpmparam);
+
+                InvokePropertyChanged("BPMParam");
+            }
+        }
+
+        string _Settingtimeparam = "IrlTime";
+        public string SettingTimeParam
+        {
+            get { return _Settingtimeparam; }
+            set
+            {
+                _Settingtimeparam = value;
+
+                Setting.Set("TimeParam", _Settingtimeparam);
+
+                InvokePropertyChanged("TimeParam");
+            }
+        }
+
         bool _guard = false;
 
         DeviceHeartrateFileOutput _fileOutput = null;
@@ -148,6 +177,8 @@ namespace MiBand_Heartrate_2
             EnableCSVOutput = Setting.Get("CSVOutput", false);
             EnableVRChatOSCOutput = Setting.Get("EnableVRChatOSCOutput", true);
             EnableVRChatOSCTimeOutput = Setting.Get("EnableVRChatOSCTimeOutput", false);
+            SettingBPMParam = Setting.Get("BPMParam", "BPM");
+            SettingTimeParam = Setting.Get("TimeParam", "IrlTime");
         }
 
         ~MainWindowViewModel()
@@ -295,10 +326,12 @@ namespace MiBand_Heartrate_2
                         {
                             Osc.OscStart();
                             Osc.OSCHeartRateEnable = true;
+                            Osc.BPMParam = SettingBPMParam;
                         }
                         if (_enableVRChatOSCTimeOutput)
                         {
                             Osc.OSCRealTimeEnable = true;
+                            Osc.TimeParam = SettingTimeParam;
                         }
                     }, o =>
                     {

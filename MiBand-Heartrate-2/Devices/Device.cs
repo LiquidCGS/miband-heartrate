@@ -58,8 +58,8 @@ namespace MiBand_Heartrate_2.Devices
             {
                 _heartrate = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Heartrate"));
-                Osc.OscSendBPM(value, "BPM");
-                Osc.OscSendTime("IrlTime");
+                Osc.OscSendBPM(value);
+                Osc.OscSendTime();
             }
         }
 
