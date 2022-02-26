@@ -1,19 +1,25 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using System.Text.RegularExpressions;
+using MiBand_Heartrate_2.Extras;
 
 namespace MiBand_Heartrate_2
 {
     public class AuthenticationKeyViewModel : ViewModel
     {
 
-        string _key = "";
+        public string _key = "";
 
         public string Key
         {
-            get { return _key; }
+            get 
+            {
+                _key = Setting.Get("AuthKey", "");
+                return _key; 
+            }
             set
             {
+                Setting.Set("AuthKey", value);
                 _key = value;
                 InvokePropertyChanged("Key");
             }
