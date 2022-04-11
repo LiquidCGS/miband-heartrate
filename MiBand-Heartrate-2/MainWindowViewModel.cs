@@ -148,17 +148,31 @@ namespace MiBand_Heartrate_2
             }
         }
 
-        string _Settingtimeparam = "IrlTime";
-        public string SettingTimeParam
+        string _SettingtimeHour = "w_HR";
+        public string SettingTimeHour
         {
-            get { return _Settingtimeparam; }
+            get { return _SettingtimeHour; }
             set
             {
-                _Settingtimeparam = value;
+                _SettingtimeHour = value;
 
-                Setting.Set("TimeParam", _Settingtimeparam);
+                Setting.Set("TimeHour", _SettingtimeHour);
 
-                InvokePropertyChanged("TimeParam");
+                InvokePropertyChanged("TimeHour");
+            }
+        }
+
+        string _SettingtimeMins = "w_MN";
+        public string SettingTimeMins
+        {
+            get { return _SettingtimeMins; }
+            set
+            {
+                _SettingtimeMins = value;
+
+                Setting.Set("TimeMins", _SettingtimeMins);
+
+                InvokePropertyChanged("TimeMins");
             }
         }
 
@@ -177,8 +191,9 @@ namespace MiBand_Heartrate_2
             EnableCSVOutput = Setting.Get("CSVOutput", false);
             EnableVRChatOSCOutput = Setting.Get("EnableVRChatOSCOutput", true);
             EnableVRChatOSCTimeOutput = Setting.Get("EnableVRChatOSCTimeOutput", false);
-            SettingBPMParam = Setting.Get("BPMParam", "BPM");
-            SettingTimeParam = Setting.Get("TimeParam", "IrlTime");
+            SettingBPMParam = Setting.Get("BPMParam", "w_BPM");
+            _SettingtimeHour = Setting.Get("TimeHour", "w_HR");
+            _SettingtimeMins = Setting.Get("TimeMins", "w_MN");
         }
 
         ~MainWindowViewModel()
@@ -331,7 +346,8 @@ namespace MiBand_Heartrate_2
                         if (_enableVRChatOSCTimeOutput)
                         {
                             Osc.OSCRealTimeEnable = true;
-                            Osc.TimeParam = SettingTimeParam;
+                            Osc.TimeHour = SettingTimeHour;
+                            Osc.TimeMins = SettingTimeMins;
                         }
                     }, o =>
                     {

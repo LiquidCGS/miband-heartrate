@@ -16,8 +16,9 @@ namespace MiBand_Heartrate_2
         static public bool OSCRealTimeEnable = false;
         static public bool OSCHeartRateEnable = false;
 
-        static public string BPMParam = "BPM";
-        static public string TimeParam = "IrlTime";
+        static public string BPMParam = "w_BPM";
+        static public string TimeHour = "w_HR";
+        static public string TimeMins = "w_MN";
 
         static private OscSender sender = null;
 
@@ -38,12 +39,7 @@ namespace MiBand_Heartrate_2
         static public void OscSendBPM(float BPM)
         {
             if (!OSCHeartRateEnable) return;
-
-            float preset = 200;
-            float formattedBPM = (BPM/preset);
-
-            //Start sending Packages, this currently manipulates both Horizontal and Vertical inputs
-            sender.Send(new OscMessage("/avatar/parameters/"+ BPMParam, formattedBPM));
+            sender.Send(new OscMessage("/avatar/parameters/"+ BPMParam, (BPM - 0) * (15.5f - (-15.5f)) / (255 - 0) + (-15.5f)));
         }
 
 
@@ -52,13 +48,9 @@ namespace MiBand_Heartrate_2
 
             if (!OSCRealTimeEnable) return;
 
-            int currentTime = System.DateTime.Now.Minute + (System.DateTime.Now.Hour * 100);
-
-            float preset = 2359;
-            float formattedTime = (currentTime / preset);
-
+            sender.Send(new OscMessage("/avatar/parameters/" + TimeMins, (System.DateTime.Now.Minute - 0) * (15.5f - (-15.5f)) / (60 - 0) + (-15.5f)));
             //Start sending Packages, this currently manipulates both Horizontal and Vertical inputs
-            sender.Send(new OscMessage("/avatar/parameters/" + TimeParam, formattedTime));
+            sender.Send(new OscMessage("/avatar/parameters/" + TimeHour, (System.DateTime.Now.Hour - 0) * (12f - (-12f)) / (24 - 0) + (-12f)));
         }
     }
 }

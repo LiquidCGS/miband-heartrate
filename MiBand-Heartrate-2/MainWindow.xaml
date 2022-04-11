@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MiBand_Heartrate_2"
         mc:Ignorable="d"
-        Title="Heartrate Monitor" Width="400" Height="370" MinHeight="370" MinWidth="400" Closing="Window_Closing"  Icon="icon.ico">
+        Title="Heartrate Monitor" Width="400" Height="370" MinHeight="370" MinWidth="400" MaxHeight="370" MaxWidth="400" Closing="Window_Closing"  Icon="icon.ico">
 
     <Window.Resources>
         <ResourceDictionary Source="Style.xaml"></ResourceDictionary>
@@ -68,14 +68,15 @@
                     <CheckBox Margin="0 2" IsChecked="{Binding EnableVRChatOSCOutput, Mode=TwoWay}">Enable VRChat OSC Heartrate Output</CheckBox>
                     <CheckBox Margin="0 2" IsChecked="{Binding EnableVRChatOSCTimeOutput, Mode=TwoWay}" IsEnabled="{Binding EnableVRChatOSCOutput}">Enable VRChat OSC IRL Time Output</CheckBox>
                 </StackPanel>
-                
+
                 <GroupBox Header="Params" Margin="233,33,0,0" BorderBrush="DarkGray" IsEnabled="{Binding EnableVRChatOSCOutput}">
                     <StackPanel Margin="0,0,0,0" Grid.Column="0">
                         <TextBox TextAlignment="Center" Text="{Binding SettingBPMParam}"  Margin="0,8,0,18" IsEnabled="{Binding EnableVRChatOSCOutput}"/>
-                        <TextBox TextAlignment="Center" Text="{Binding SettingTimeParam}" Margin="0,-18,0,0" IsEnabled="{Binding EnableVRChatOSCTimeOutput}"/>
+                        <TextBox TextAlignment="Center" Text="{Binding SettingTimeHour}" Margin="0,-18,60,0" IsEnabled="{Binding EnableVRChatOSCTimeOutput}"/>
+                        <TextBox TextAlignment="Center" Text="{Binding SettingTimeMins}" Margin="0,-18,0,0" IsEnabled="{Binding EnableVRChatOSCTimeOutput}" HorizontalAlignment="Right" Width="60"/>
                     </StackPanel>
                 </GroupBox>
-                
+
             </Grid>
         </GroupBox>
 
